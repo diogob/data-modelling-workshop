@@ -1,24 +1,24 @@
-# README
+# Data Modelling Workshop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This workshop will work with a model that should be familiar to most developers. Software repository management inspired by Github funcionality. The goal is not to model in detail the real funcionality but to narrow down some examples that will illustrate useful tecniques.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+For the workshop you will need to have installed:
+* [Rails](https://rubyonrails.org/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [git](https://git-scm.com/)
 
-* System dependencies
+Then just clone the repo and install the bundle:
 
-* Configuration
+```bash
+$ git clone https://github.com/diogob/data-modelling-workshop.git
+$ cd data-modelling-workshop && bundle install
+```
 
-* Database creation
+## Getting started
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. [Removing `NULLs`](./docs/removing-nulls.md)
+2. Creating natural keys
+3. Avoid storing impossible states
+4. Modelling events for input and deriving entities from views
