@@ -25,8 +25,9 @@ As an exercise we will extend our model to include information payment cancellat
 Take the following rules into account:
 
 * Once a payment has been created it cannot be altered in any way, but it can be cancelled.
+* A payment may be cancelled only once.
 * A subscription state depends on both it's payments and the payment cancellations.
-* Subscriptions are active if and only if there is a payment without cancellations in the last 30 days.
+* Subscriptions are active if and only if there is a payment without cancellations in the last 30 days and it was not explicitly deactivated.
 
 Create a relation to store payments cancellations.
 Implement a view over subscriptions, payments and cancellations called `subscription_states`. This view will have a field called `active`, this is a boolean indicating whether the subscription is active or not.
