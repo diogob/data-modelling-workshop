@@ -24,4 +24,5 @@ Take the following rules into account:
 * Users cannot pay for other users subscriptions.
 
 Implement the roles above in your model without using any stored procdures.
-Keep in mind that [check constraints](https://www.postgresql.org/docs/13/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) and [custom domains](https://www.postgresql.org/docs/current/sql-createtype.html) might be very useful to solve this exercise.
+Keep in mind that [check constraints](https://www.postgresql.org/docs/13/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) and [custom domains](https://www.postgresql.org/docs/current/sql-createdomain.html) might be very useful to solve this exercise.
+Also remember that leaving state implied is also an important part of the modelling activity.
