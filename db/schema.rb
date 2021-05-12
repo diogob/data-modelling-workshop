@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_171353) do
+ActiveRecord::Schema.define(version: 2021_05_12_171637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "subscription_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at", "subscription_id"], name: "index_payments_on_created_at_and_subscription_id", unique: true
+  end
 
   create_table "repositories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
@@ -33,6 +40,16 @@ ActiveRecord::Schema.define(version: 2021_05_12_171353) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["key"], name: "index_ssh_keys_on_key", unique: true
     t.index ["user_id"], name: "index_ssh_keys_on_user_id", unique: true
+  end
+
+  create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.decimal "price", null: false
+    t.datetime "deactivated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at", "user_id"], name: "index_subscriptions_on_created_at_and_user_id", unique: true
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", unique: true, where: "(deactivated_at IS NULL)"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
