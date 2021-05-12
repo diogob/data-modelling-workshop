@@ -17,12 +17,12 @@ Knowing the more general principle underlying data modelling allow us to further
 As an exercise we will extend our model to include information on user subscriptions and payments.
 Take the following rules into account:
 
-* Each user might have several subscription, but only one of them is active at a time.
+* Each user might have several subscriptions, but only one of them is active at a time.
 * Once a user creates a subscription, it cannot be removed only deactivated.
 * Subscriptions always have a price that cannot be negative.
 * Users can pay several times for the same subscription, the amount paid must always match exactly the subscription price.
 * Users cannot pay for other users subscriptions.
 
-Implement the roles above in your model without using any stored procdures.
+Implement the roles above in your model without using any stored procedures.
 Keep in mind that [check constraints](https://www.postgresql.org/docs/13/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) and [custom domains](https://www.postgresql.org/docs/current/sql-createdomain.html) might be very useful to solve this exercise.
 Also remember that leaving state implied is also an important part of the modelling activity.
