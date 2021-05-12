@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_170651) do
+ActiveRecord::Schema.define(version: 2021_05_12_171353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_170651) do
     t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "name"], name: "index_repositories_on_user_id_and_name", unique: true
   end
 
   create_table "ssh_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_170651) do
     t.text "key", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_ssh_keys_on_key", unique: true
     t.index ["user_id"], name: "index_ssh_keys_on_user_id", unique: true
   end
 
@@ -38,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_170651) do
     t.text "password", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "repositories", "users"
