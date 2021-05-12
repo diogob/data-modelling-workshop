@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_171637) do
+ActiveRecord::Schema.define(version: 2021_05_12_174055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "payment_cancellations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "payment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["payment_id"], name: "index_payment_cancellations_on_payment_id", unique: true
+  end
 
   create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "subscription_id", null: false
@@ -62,4 +69,14 @@ ActiveRecord::Schema.define(version: 2021_05_12_171637) do
 
   add_foreign_key "repositories", "users"
   add_foreign_key "ssh_keys", "users"
+
+  create_view "subscription_states", sql_definition: <<-SQL
+      SELECT s.id AS subscription_id,
+      ((s.deactivated_at IS NULL) AND (EXISTS ( SELECT
+             FROM payments p
+            WHERE ((p.subscription_id = s.id) AND (p.created_at >= (CURRENT_TIMESTAMP - 'P30D'::interval)) AND (NOT (EXISTS ( SELECT
+                     FROM payment_cancellations pc
+                    WHERE (pc.payment_id = p.id)))))))) AS active
+     FROM subscriptions s;
+  SQL
 end
