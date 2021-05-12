@@ -30,7 +30,7 @@ First tip of the tutorial: UUID keys are awesome.
 
 ## Solving the exercises
 
-The only files necessary to solve the exercises are migrations that create the database relations, rails models can be omitted.
+The only files necessary to solve the exercises are migrations that create or alter the database relations, rails models can be omitted.
 As there is no one right answer for a modelling problem there is no way to automatically verify answers. But an example of solutions are provided in the branch [exercises-example-solutions](https://github.com/diogob/data-modelling-workshop/tree/exercises-example-solutions).
 
 ## Getting started
