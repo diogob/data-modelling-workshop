@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_211922) do
+ActiveRecord::Schema.define(version: 2021_05_12_170651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,15 +24,22 @@ ActiveRecord::Schema.define(version: 2021_03_30_211922) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "ssh_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.text "name", null: false
+    t.text "key", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_ssh_keys_on_user_id", unique: true
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "email"
-    t.text "password"
-    t.text "ssh_key"
-    t.text "ssh_key_name"
-    t.text "ssh_key_created_at"
+    t.text "email", null: false
+    t.text "password", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "repositories", "users"
+  add_foreign_key "ssh_keys", "users"
 end
