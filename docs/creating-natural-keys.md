@@ -33,4 +33,4 @@ Consider the following rules for the exercise:
  * There is no need to preserve any existing data.
 
 Add unique indexes to ensure all rules above are preserved.
-You could use unique constraints (that will imply the creation of unique indicies) but that is entirely optional.
+You could use unique constraints (that will imply the creation of unique indices) but that is entirely optional.
