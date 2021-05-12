@@ -5,7 +5,7 @@
 A lot has been [written](https://en.wikipedia.org/wiki/Null_pointer) and [said](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/) about null pointers in programming language.
 It requires special attention from the developers and some boiler plate to handle it properly.
 
-In SQL database systems the `NULL` is a state where the value is unknown. This behaves slightly better than in the case of null pointers, but we still have to be careful when using it. Firtly because a lot of programming languages will map the database `NULL` to some sort of null pointer. Secondly because most database opteraions over `NULLs` are counter-intuitive since their result is always NULL. The exceptions are functions and operators designed specially for `NULL` handling (e.g. `IS NULL`, `coalesce`).
+In SQL database systems the `NULL` is a state where the value is unknown. This behaves slightly better than in the case of null pointers, but we still have to be careful when using it. Firstly because a lot of programming languages will map the database `NULL` to some sort of null pointer. Secondly because most database opteraions over `NULLs` are counter-intuitive since their result is always NULL. The exceptions are functions and operators designed specially for `NULL` handling (e.g. `IS NULL`, `coalesce`).
 
 Try on `psql`:
 ```
@@ -29,7 +29,7 @@ data_modelling_workshop_development=# select 0 = 1;
 
 The return should be `f` for false.
 
-Lastly, let's the constants `0` and `NULL`.
+Lastly, let's compare the constants `0` and `NULL`.
 ```
 data_modelling_workshop_development=# select 0 = NULL;
 ```
